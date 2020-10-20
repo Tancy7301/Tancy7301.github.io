@@ -335,6 +335,80 @@ span {
     border-left: 0.5em solid #9B8651;
     border-bottom: 0.5em solid #fff;
 }
+.ribbon3 {
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    right: 150px;
+    top: 200px;
+    margin: auto;
+}
+
+.ribbon3:after,
+.ribbon3:before {
+    margin-top: 0.5em;
+    content: "";
+    display: flex;
+    ;
+    border: 1.5em solid #fff;
+}
+
+.ribbon3:after {
+    border-right-color: transparent;
+}
+
+.ribbon3:before {
+    border-left-color: transparent;
+}
+
+.ribbon3 a:link,
+.ribbon3 a:visited {
+    color: #000;
+    text-decoration: none;
+    height: 3.5em;
+    overflow: hidden;
+}
+
+.ribbon3 span {
+    background: #fff;
+    display: inline-block;
+    line-height: 3em;
+    padding: 0 1.5em;
+    margin-top: 0.5em;
+    position: relative;
+    -webkit-transition: background-color 0.2s, margin-top 0.2s;
+    /* Saf3.2+, Chrome */
+    -moz-transition: background-color 0.2s, margin-top 0.2s;
+    /* FF4+ */
+    -ms-transition: background-color 0.2s, margin-top 0.2s;
+    /* IE10 */
+    -o-transition: background-color 0.2s, margin-top 0.2s;
+    /* Opera 10.5+ */
+    transition: background-color 0.2s, margin-top 0.2s;
+}
+
+.ribbon3 a:hover span {
+    background: #FFD204;
+    margin-top: 0;
+}
+
+.ribbon3 span:before {
+    content: "";
+    position: absolute;
+    top: 3em;
+    left: 0;
+    border-right: 0.5em solid #9B8651;
+    border-bottom: 0.5em solid #fff;
+}
+
+.ribbon3 span:after {
+    content: "";
+    position: absolute;
+    top: 3em;
+    right: 0;
+    border-left: 0.5em solid #9B8651;
+    border-bottom: 0.5em solid #fff;
+}
 .introduce {
     display: flex;
     flex-direction: column;
