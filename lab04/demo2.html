@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+		<title>Lab4_1</title>
+		<script id="rt-vshader" type="x-shader/x-vertex">
+			attribute vec4 vPosition;
+			attribute vec4 vColor;
+			varying vec4 fColor;
+			
+			uniform vec3 theta;
+			uniform vec3 talk;
+			uniform vec3 zoom;
+			
+			void main(){
+				// randians()函数，将角度转换为弧度
+				vec3 angles = radians(theta);
+				vec3 cost = cos(theta);
+				vec3 sint = sin(theta);
+				
+				
+				// 计算沿 x, y, z 三轴转过弧度后的点的位置
+				mat4 rx = mat4(1.0, 0.0, 0.0, 0.0,
+							   0.0, cost.x, sint.x, 0.0,
+							   0.0, -sint.x, cost.x, 0.0,
+							   0.0, 0.0, 0.0, 1.0);
+				
+				mat4 ry = mat4(cost.y, 0.0, -sint.y, 0.0,
+							   0.0, 1.0, 0.0, 0.0,
+							   sint.y, 0.0, cost.y, 0.0,
+							   0.0, 0.0, 0.0, 1.0);
+				
+				mat4 rz = mat4(cost.z, sint.z, 0.0, 0.0,
+							   -sint.z, cost.z, 0.0, 0.0,
+							   0.0, 0.0, 1.0, 0.0,
+							   0.0, 0.0, 0.0, 1.0);
+							   
+				mat4 mt = mat4(1.0, 0.0, 0.0, 0.0,
+							   0.0, 1.0, 0.0, 0.0,
+							   0.0, 0.0, 1.0, 0.0,
+							   talk[0], talk[1], talk[2], 1.0);
+				
+				mat4 Zoom = mat4(1.0+zoom[0], 0.0, 0.0, 0.0,
+								 0.0, 1.0+zoom[1], 0.0, 0.0,
+								 0.0, 0.0, 1.0+zoom[2], 0.0,
+								 0.0, 0.0, 0.0, 1.0);
+				
+				fColor = vColor;
+				gl_Position = rz * ry * rx * vPosition;
+				gl_Position = Zoom * gl_Position;
+
+				gl_Position = mt * gl_Position;
+				gl_Position.z = -gl_Position.z;
+			}
+		</script> 
+		<script id="rt-fshader" type="x-shader/x-fragment">
+			precision mediump float;
+			varying vec4 fColor;
+			
+			void main(){
+				gl_FragColor = fColor;
+			}
+		</script>
+		<script src="common/gl-matrix-min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="common/initShaders.js" type="text/javascript" charset="utf-8"></script>
+		<script src="common/webgl-utils.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/interactiveCube.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<h1 style="text-align: center;">旋转的立方体</h1>
+		<canvas id="rt-cb-canvas" width="512" height="512" >
+		    你的浏览器不支持HTML5 canvas元素
+		</canvas>
+		<br/>
+		<button id="xButton">Rotate X</button>
+		<button id="yButton">Rotate Y</button>
+		<button id="zButton">Rotate Z</button>
+		<br/>
+		<input type="range" id="xTalk" min="-100" max="100" value="0" /> 平移x轴<br />
+		<input type="range" id="yTalk" min="-100" max="100" value="0" /> 平移y轴<br />
+		<input type="range" id="zTalk" min="-100" max="100" value="0" /> 平移z轴<br />
+	
+		<input type="range" id="xZoom" min="-100" max="100" value="0" /> 缩放x轴<br />
+		<input type="range" id="yZoom" min="-100" max="100" value="0" /> 缩放y轴<br />
+		<input type="range" id="zZoom" min="-100" max="100" value="0" /> 缩放z轴<br />
+
+	</body>
+</html>
