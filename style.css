@@ -223,6 +223,14 @@ span {
     top: 250px;
     margin: auto;
 }
+.ribbon5 {
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    right: 150px;
+    top: 300px;
+    margin: auto;
+}
 .introduce {
     display: flex;
     flex-direction: column;
