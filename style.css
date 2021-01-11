@@ -231,6 +231,14 @@ span {
     top: 300px;
     margin: auto;
 }
+.ribbon8 {
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    right: 150px;
+    top: 350px;
+    margin: auto;
+}
 .introduce {
     display: flex;
     flex-direction: column;
