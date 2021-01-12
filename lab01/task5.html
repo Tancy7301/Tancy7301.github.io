@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+		<title>绘制彩色三角形 Demo</title>
+		<!-- 顶点着色器和片元着色器代码 -->
+		<script id="vertex-shader" type="x-shader/x-vertex">
+			attribute vec4 vPosition;
+			attribute vec4 vColor;
+			varying vec4 fColor;
+			void main(){
+				gl_Position = vPosition;
+				fColor= vColor;
+			}
+		</script>
+		<script id="fragment-shader" type="x-shader/x-fragment">
+			precision mediump float;
+			varying vec4 fColor;
+			void main(){
+				gl_FragColor = fColor;//vec4(0.9, 1.0, 0.0, 0.7 );
+			}
+		</script>
+		<!-- 引入相关js文件 -->
+		<script type="text/javascript" src="common/webgl-utils.js"></script>
+		<script type="text/javascript" src="common/initShaders.js"></script>
+		<script type="text/javascript" src="common/glMatrix-0.9.5.min.js"></script>
+		<script type="text/javascript" src="js/color.js"></script>
+	</head>
+	<body>
+		<canvas id="triangle-canvas" style="border:none;" width="500" height="500" ></canvas>
+	</body>
+</html>
